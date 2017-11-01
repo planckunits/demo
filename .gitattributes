@@ -1,0 +1,5 @@
+* text=auto
+*.js text eol=lf
+*.lock binary
+package-lock.json binary
+yarn.lock binary
