@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <PageHeader title={'Sensor Uniform Map'} />
+        <PageHeader title={'PlanckUnits DEMO'} />
         <Switcher />
         <Tabs />
       </div>

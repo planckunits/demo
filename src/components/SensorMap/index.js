@@ -27,7 +27,7 @@ const SensorMap = ({ sensors, onMouseEnter, onMouseLeave }: Props) => (
     onChildMouseLeave={(key: string, childProps: MapSensorProps) => {
       onMouseLeave(childProps.sensor)
     }}
-    center={{ lat: 35.681215342775026, lng: 139.76703829930344 }}
+    center={{ lat: 37.369483, lng: 140.3717863 }}
   >
     {sensors.map(sensor => (
       <MapSensor
