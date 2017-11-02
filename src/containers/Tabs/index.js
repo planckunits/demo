@@ -13,7 +13,7 @@ class Container extends React.Component<Props> {
   render() {
     const { system } = this.props
     return (
-      <div>{system.tab == 'base' ? <SensorGrid /> : <SensorContainer />}</div>
+      <div>{system.tab === 'base' ? <SensorGrid /> : <SensorContainer />}</div>
     )
   }
 }

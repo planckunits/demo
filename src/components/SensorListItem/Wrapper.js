@@ -11,19 +11,6 @@ const bgEmergeAnimation = keyframes`
 }
 `
 
-const bgEmergeAnimationSuper = keyframes`
-0% {
-  color: white;
-}
-50% {
-  background: orange;
-}
-100% {
-  background: red;
-  transform: rotate(360deg);
-}
-`
-
 export const Wrapper = styled.li`
   list-style-type: none;
   width: 300px;
@@ -46,9 +33,7 @@ export const ValueRowLabel = styled.div`
   padding-right: 5px;
 `
 
-export const Cell = styled.div`
-  width: 14em;
-`
+export const Cell = styled.div`width: 14em;`
 
 export const Value = styled.div`
   display: flex;
