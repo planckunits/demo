@@ -2,6 +2,9 @@
 
 import type { ThunkAction, Sensor } from '../../types'
 import { receiveSensor } from '../SensorContainer/actions'
+import { fakeData, updateFakeData } from '../../utils'
+
+import _ from 'lodash'
 // import * as actions from './actions'
 
 import mqtt from 'mqtt'
@@ -34,5 +37,25 @@ export function createMqttClient(topic: string): ThunkAction {
       const sensor: Sensor = JSON.parse(payload)
       dispatch(receiveSensor({ id: topic, ...sensor }))
     })
+  }
+}
+
+const DELAY = 200 //ms
+
+const sleep = ms => new Promise(r => setTimeout(r, ms))
+
+export function dummyLoop(): ThunkAction {
+  return async dispatch => {
+    const ids = 'abcdefghijklmnopqrstuvwxyz'.split('')
+
+    const data = _.zipObject(ids, _.map(ids, () => fakeData()))
+
+    while (true) {
+      await sleep(DELAY)
+      const targetId = _.sample(ids)
+      data[targetId] = updateFakeData(data[targetId])
+
+      dispatch(receiveSensor({ id: targetId, ...data[targetId] }))
+    }
   }
 }

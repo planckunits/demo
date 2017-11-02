@@ -5,12 +5,12 @@ import ReactDOM from 'react-dom'
 import App from './containers/App'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store'
-import { createMqttClient } from './containers/SensorContainer/logic'
+import { dummyLoop } from './containers/SensorContainer/logic'
 import './injectGlobal'
 
 const store = configureStore()
 
-store.dispatch(createMqttClient('topic/project1/#'))
+store.dispatch(dummyLoop())
 
 ReactDOM.render(
   <Provider store={store}>
