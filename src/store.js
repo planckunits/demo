@@ -6,13 +6,14 @@ import type { Store } from './types'
 
 export default () => {
   const middleware = [thunk]
-  const store: Store = createStore(
-    reducer,
-    compose(
-      applyMiddleware(...middleware),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-  )
+
+  const devtool =
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+  const composer = devtool
+    ? compose(applyMiddleware(...middleware), devtool)
+    : compose(applyMiddleware(...middleware))
+
+  const store: Store = createStore(reducer, composer)
   return store
 }
