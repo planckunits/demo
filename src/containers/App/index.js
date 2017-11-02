@@ -4,11 +4,11 @@ import React from 'react'
 import PageHeader from '../../components/PageHeader'
 import Switcher from '../System/Switcher'
 import Tabs from '../Tabs'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 const App = () => (
   <Router>
-    <div>
+    <Switch>
       <Route
         path="/fukushima-reif-2017"
         component={() => (
@@ -19,7 +19,7 @@ const App = () => (
           </div>
         )}
       />
-    </div>
+    </Switch>
   </Router>
 )
 
