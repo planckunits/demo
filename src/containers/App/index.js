@@ -1,18 +1,26 @@
-import React, { Component } from 'react'
+// @flow
+
+import React from 'react'
 import PageHeader from '../../components/PageHeader'
 import Switcher from '../System/Switcher'
 import Tabs from '../Tabs'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <PageHeader title={'PlanckUnits DEMO'} />
-        <Switcher />
-        <Tabs />
-      </div>
-    )
-  }
-}
+const App = () => (
+  <Router>
+    <div>
+      <Route
+        path="/fukushima-reif-2017"
+        component={() => (
+          <div>
+            <PageHeader title={'Reif福島 杭デモ'} />
+            <Switcher />
+            <Tabs />
+          </div>
+        )}
+      />
+    </div>
+  </Router>
+)
 
 export default App
