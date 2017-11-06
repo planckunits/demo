@@ -2,7 +2,7 @@
 
 import React from 'react'
 import type { Sensor } from '../../types'
-import { Marker, MarkerImg } from './Marker'
+import { Marker, MarkerImg, Label } from './Marker'
 
 import sensorImage from './sensor.svg'
 import sensorImageError from './sensor-e.svg'
@@ -24,8 +24,8 @@ const renderSensor = sensor => {
 
 const MapSensor = ({ sensor, $hover = false }: Props) => (
   <Marker hover={$hover || sensor.hover}>
-    <span>{sensor.id}</span>
     {renderSensor(sensor)}
+    <Label primary={sensor.primary}>{sensor.id}</Label>
   </Marker>
 )
 

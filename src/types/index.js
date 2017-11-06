@@ -36,6 +36,7 @@ export type Sensor = {
   gyro: Axis3,
   interrupt: boolean,
   hover: boolean,
+  primary: boolean,
 }
 
 export type System = {

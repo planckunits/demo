@@ -28,6 +28,7 @@ export function fakeData(): $Shape<Sensor> {
       y: Math.random(),
       z: Math.random(),
     },
+    primary: false,
     interrupt: false,
   }
 }
@@ -53,6 +54,7 @@ export function fakeDataLeafFukushima(): $Shape<Sensor> {
       y: Math.random(),
       z: Math.random(),
     },
+    primary: false,
     interrupt: false,
   }
 }
