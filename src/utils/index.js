@@ -2,8 +2,8 @@
 
 import type { Sensor } from '../types'
 
-export function fakeData(): $Shape<Sensor> {
-  return {
+export function* fakeData(): Generator<$Shape<Sensor>, void, true> {
+  yield {
     gps: {
       lat: 37.3685362 + (Math.random() - 0.5) * 0.003,
       lng: 140.3825798 + (Math.random() - 0.5) * 0.003,
@@ -33,29 +33,38 @@ export function fakeData(): $Shape<Sensor> {
   }
 }
 
-export function fakeDataLeafFukushima(): $Shape<Sensor> {
-  return {
-    gps: {
-      lat: 37.3685362 + (Math.random() - 0.5) * 0.003,
-      lng: 140.3837 + (Math.random() - 0.5) * 0.0002,
-    },
-    accel: {
-      x: Math.random(),
-      y: Math.random(),
-      z: Math.random(),
-    },
-    magnestic: {
-      x: Math.random(),
-      y: Math.random(),
-      z: Math.random(),
-    },
-    gyro: {
-      x: Math.random(),
-      y: Math.random(),
-      z: Math.random(),
-    },
-    primary: false,
-    interrupt: false,
+export function* fakeDataLeafFukushima(): Generator<
+  $Shape<Sensor>,
+  void,
+  true
+> {
+  const start = 0.0027
+  let di = 0
+  while (true) {
+    di++
+    yield {
+      gps: {
+        lat: 37.3685362 + start + di * (-0.003 / 27),
+        lng: 140.3837 + (Math.random() - 0.5) * 0.0002,
+      },
+      accel: {
+        x: Math.random(),
+        y: Math.random(),
+        z: Math.random(),
+      },
+      magnestic: {
+        x: Math.random(),
+        y: Math.random(),
+        z: Math.random(),
+      },
+      gyro: {
+        x: Math.random(),
+        y: Math.random(),
+        z: Math.random(),
+      },
+      primary: false,
+      interrupt: false,
+    }
   }
 }
 

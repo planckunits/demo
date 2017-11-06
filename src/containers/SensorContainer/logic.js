@@ -14,6 +14,8 @@ const url =
     : 'ws://sensor-uniform.cps.im.dendai.ac.jp:1883'
 // : 'ws://localhost:3001'
 
+const faker = fakeDataLeafFukushima()
+
 export function onMouseEnter(sensor: Sensor): ThunkAction {
   return async dispatch => {
     dispatch(receiveSensor({ ...sensor, hover: true }))
@@ -39,7 +41,7 @@ export function createMqttClient(topic: string): ThunkAction {
       const id = topics[1]
       const pj = JSON.parse(payload.toString())
       const sensor = {
-        ...fakeDataLeafFukushima(),
+        ...faker.next().value,
         id,
         accel: { x: pj.acc_x, y: pj.acc_y, z: pj.acc_z },
         primary: true,
@@ -57,7 +59,7 @@ export function dummyLoop(): ThunkAction {
   return async dispatch => {
     const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(x => `dumm${x}`)
 
-    const data = _.zipObject(ids, _.map(ids, () => fakeDataLeafFukushima()))
+    const data = _.zipObject(ids, _.map(ids, () => faker.next().value))
 
     while (true) {
       await sleep(DELAY)
