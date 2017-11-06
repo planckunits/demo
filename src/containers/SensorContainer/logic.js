@@ -11,7 +11,8 @@ import mqtt from 'mqtt'
 const url =
   process.env.NODE_ENV === 'production'
     ? 'ws://sensor-uniform.cps.im.dendai.ac.jp:1883'
-    : 'ws://localhost:3001'
+    : 'ws://sensor-uniform.cps.im.dendai.ac.jp:1883'
+// : 'ws://localhost:3001'
 
 export function onMouseEnter(sensor: Sensor): ThunkAction {
   return async dispatch => {
@@ -46,7 +47,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 export function dummyLoop(): ThunkAction {
   return async dispatch => {
-    const ids = 'abcdefghijklmnopqrstuvwxyz'.split('').map(x => `Dm_${x}`)
+    const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(x => `demo${x}`)
 
     const data = _.zipObject(ids, _.map(ids, () => fakeDataLeafFukushima()))
 

@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 const Main = () => (
   <div>
-    <PageHeader title={'Reif福島 杭デモ'} />
+    <PageHeader title={'REIFふくしま 杭デモ'} />
     <Switcher />
     <Tabs />
   </div>

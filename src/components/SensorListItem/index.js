@@ -24,8 +24,8 @@ const GeoLabel = ({ sensor }: { sensor: Sensor }) => (
     </pre>
     <div
       onClick={() => {
-        const url = `https://www.google.co.jp/maps/@${sensor.gps.lat},${sensor
-          .gps.lng},18z`
+        const url = `https://www.google.co.jp/maps?q=${sensor.gps.lat},${sensor
+          .gps.lng}`
         console.log(url)
         window.open(url)
       }}
