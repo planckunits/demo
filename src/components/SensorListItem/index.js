@@ -80,8 +80,6 @@ class SensorListItem extends React.Component<Props, {}> {
       >
         <Name>ID: {sensor.id}</Name>
         <Axis3Row v={sensor.accel} name={'Accelo'} />
-        <Axis3Row v={sensor.gyro} name={'Gyro'} />
-        <Axis3Row v={sensor.magnestic} name={'Magnet'} />
         <GeoLabel sensor={sensor} />
       </Wrapper>
     )
