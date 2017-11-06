@@ -25,7 +25,7 @@ client.on('message', (...args) => {
   client.end()
 })
 
-const ids = 'abcdefghijklmnopqrstuvwxyz'.split('')
+const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(c => `Dm-${c}`)
 
 const data = _.zipObject(ids, _.map(ids, () => fakeData()))
 

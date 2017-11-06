@@ -2,7 +2,7 @@
 
 import React from 'react'
 import type { Sensor } from '../../types'
-import SensorListItem from '../../containers/SensorListItemContainer'
+import SensorListItem from '../SensorListItemContainer'
 import { Wrapper, HeaderTitle, Header, Body } from './Wrapper'
 
 type Props = {

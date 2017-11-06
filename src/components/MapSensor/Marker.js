@@ -13,3 +13,9 @@ export const MarkerImg = styled.img`
   height: 100%;
   wieght: 100%;
 `
+
+export const Label = styled.span`
+  padding: 2px;
+  position: absolute;
+  background: ${p => (p.primary ? 'yellow' : 'white')};
+`

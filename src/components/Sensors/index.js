@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { Sensor } from '../../types'
 import SensorMap from '../../containers/SensorMapContainer'
-import SensorList from '../SensorList'
+import SensorList from '../../containers/SensorList'
 import { SensorsWrapper } from './SensorsWrapper'
 
 export type Props = {

@@ -2,7 +2,7 @@
 
 import type { ThunkAction, Sensor } from '../../types'
 import { receiveSensor } from '../SensorContainer/actions'
-import { fakeData, updateFakeData } from '../../utils'
+import { fakeDataLeafFukushima, updateFakeDataLeafFukushima } from '../../utils'
 
 import _ from 'lodash'
 // import * as actions from './actions'
@@ -11,7 +11,8 @@ import mqtt from 'mqtt'
 const url =
   process.env.NODE_ENV === 'production'
     ? 'ws://sensor-uniform.cps.im.dendai.ac.jp:1883'
-    : 'ws://localhost:3001'
+    : 'ws://sensor-uniform.cps.im.dendai.ac.jp:1883'
+// : 'ws://localhost:3001'
 
 export function onMouseEnter(sensor: Sensor): ThunkAction {
   return async dispatch => {
@@ -34,8 +35,16 @@ export function createMqttClient(topic: string): ThunkAction {
     })
 
     client.on('message', (topic, payload) => {
-      const sensor: Sensor = JSON.parse(payload)
-      dispatch(receiveSensor({ id: topic, ...sensor }))
+      const topics = topic.split('/')
+      const id = topics[1]
+      const pj = JSON.parse(payload.toString())
+      const sensor = {
+        ...fakeDataLeafFukushima(),
+        id,
+        accel: { x: pj.acc_x, y: pj.acc_y, z: pj.acc_z },
+        primary: true,
+      }
+      dispatch(receiveSensor(sensor))
     })
   }
 }
@@ -46,14 +55,14 @@ const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 export function dummyLoop(): ThunkAction {
   return async dispatch => {
-    const ids = 'abcdefghijklmnopqrstuvwxyz'.split('')
+    const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(x => `dumm${x}`)
 
-    const data = _.zipObject(ids, _.map(ids, () => fakeData()))
+    const data = _.zipObject(ids, _.map(ids, () => fakeDataLeafFukushima()))
 
     while (true) {
       await sleep(DELAY)
       const targetId = _.sample(ids)
-      data[targetId] = updateFakeData(data[targetId])
+      data[targetId] = updateFakeDataLeafFukushima(data[targetId])
 
       dispatch(receiveSensor({ id: targetId, ...data[targetId] }))
     }

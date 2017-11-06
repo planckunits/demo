@@ -4,22 +4,22 @@ import React from 'react'
 import PageHeader from '../../components/PageHeader'
 import Switcher from '../System/Switcher'
 import Tabs from '../Tabs'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
+const Main = () => (
+  <div>
+    <PageHeader title={'REIFふくしま 杭デモ'} />
+    <Switcher />
+    <Tabs />
+  </div>
+)
 
 const App = () => (
   <Router>
-    <div>
-      <Route
-        path="/fukushima-reif-2017"
-        component={() => (
-          <div>
-            <PageHeader title={'Reif福島 杭デモ'} />
-            <Switcher />
-            <Tabs />
-          </div>
-        )}
-      />
-    </div>
+    <Switch>
+      <Route path="/" component={Main} />
+      <Route path="/fukushima-reif-2017" component={Main} />
+    </Switch>
   </Router>
 )
 

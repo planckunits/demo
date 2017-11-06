@@ -18,7 +18,7 @@ export type Props = {
 const SensorMap = ({ sensors, onMouseEnter, onMouseLeave }: Props) => (
   <GoogleMapReact
     bootstrapURLKeys={{ key }}
-    defaultZoom={16}
+    defaultZoom={17}
     minZoom={4}
     hoverDistance={40}
     onChildMouseEnter={(key: string, childProps: MapSensorProps) => {
@@ -27,7 +27,7 @@ const SensorMap = ({ sensors, onMouseEnter, onMouseLeave }: Props) => (
     onChildMouseLeave={(key: string, childProps: MapSensorProps) => {
       onMouseLeave(childProps.sensor)
     }}
-    center={{ lat: 37.3685362, lng: 140.3825798 }}
+    center={{ lat: 37.3685362, lng: 140.3837 }}
   >
     {sensors.map(sensor => (
       <MapSensor

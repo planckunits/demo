@@ -5,7 +5,7 @@ import { Actions } from './actionTypes'
 export type State = System
 
 const initialState: State = {
-  tab: 'base',
+  tab: 'map',
 }
 
 export default function(
