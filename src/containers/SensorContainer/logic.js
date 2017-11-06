@@ -35,8 +35,16 @@ export function createMqttClient(topic: string): ThunkAction {
     })
 
     client.on('message', (topic, payload) => {
-      const sensor: Sensor = JSON.parse(payload)
-      dispatch(receiveSensor({ id: topic, ...sensor }))
+      const topics = topic.split('/')
+      const id = topics[1]
+      const pj = JSON.parse(payload.toString())
+      const sensor = {
+        ...fakeDataLeafFukushima(),
+        id,
+        accel: { x: pj.acc_x, y: pj.acc_y, z: pj.acc_z },
+        primary: true,
+      }
+      dispatch(receiveSensor(sensor))
     })
   }
 }
@@ -47,7 +55,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 export function dummyLoop(): ThunkAction {
   return async dispatch => {
-    const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(x => `demo${x}`)
+    const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(x => `dumm${x}`)
 
     const data = _.zipObject(ids, _.map(ids, () => fakeDataLeafFukushima()))
 
