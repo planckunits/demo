@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="144px" height="144px" viewBox="0 0 144 144" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>sensori-e</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="144" height="144"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sensori-e">
+            <g id="Rectangle">
+                <use fill="#D4FFCB" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#005402" stroke-width="18" x="9" y="9" width="126" height="126"></rect>
+            </g>
+            <circle id="Oval" fill="#006511" cx="72.5" cy="72.5" r="33.5"></circle>
+        </g>
+    </g>
+</svg>

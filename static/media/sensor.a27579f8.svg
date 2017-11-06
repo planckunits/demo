@@ -3,11 +3,16 @@
     <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
     <title>sensor</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="144" height="144"></rect>
+    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="sensor">
-            <path d="M72,144 C111.764502,144 144,111.764502 144,72 C112.318195,63.9603662 111.764502,63.9603662 72,63.9603662 C32.235498,63.9603662 36.0066024,63.9603662 0,72 C0,111.764502 32.235498,144 72,144 Z" id="Oval" fill="#F0F0F0"></path>
-            <path d="M144,72 C144,32.235498 111.764502,0 72,0 C32.235498,0 0,32.235498 0,72 C44.6920147,72 116.567945,72 144,72 Z" id="Oval" fill="#B4E989"></path>
+            <g id="Rectangle">
+                <use fill="#FFCBCB" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#540000" stroke-width="18" x="9" y="9" width="126" height="126"></rect>
+            </g>
+            <circle id="Oval" fill="#991616" cx="72.5" cy="72.5" r="33.5"></circle>
         </g>
     </g>
 </svg>
