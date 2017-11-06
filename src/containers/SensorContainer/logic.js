@@ -46,7 +46,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 export function dummyLoop(): ThunkAction {
   return async dispatch => {
-    const ids = 'abcdefghijklmnopqrstuvwxyz'.split('')
+    const ids = 'abcdefghijklmnopqrstuvwxyz'.split('').map(x => `Dm_${x}`)
 
     const data = _.zipObject(ids, _.map(ids, () => fakeData()))
 
