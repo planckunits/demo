@@ -29,7 +29,7 @@ export function onMouseLeave(sensor: Sensor): ThunkAction {
 }
 
 export function createMqttClient(topic: string): ThunkAction {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     const client = mqtt.connect(url)
     client.on('connect', () => {
       console.log('connected')
@@ -40,13 +40,18 @@ export function createMqttClient(topic: string): ThunkAction {
       const topics = topic.split('/')
       const id = topics[1]
       const pj = JSON.parse(payload.toString())
-      const sensor = {
-        ...faker.next().value,
-        id,
-        accel: { x: pj.acc_x, y: pj.acc_y, z: pj.acc_z },
-        primary: true,
+      const accel = { x: pj.acc_x, y: pj.acc_y, z: pj.acc_z }
+      if (id in getState().SensorById) {
+        dispatch(receiveSensor({ id, accel }))
+      } else {
+        const sensor = {
+          ...faker.next().value,
+          id,
+          accel,
+          primary: true,
+        }
+        dispatch(receiveSensor(sensor))
       }
-      dispatch(receiveSensor(sensor))
     })
   }
 }
@@ -64,6 +69,7 @@ export function dummyLoop(): ThunkAction {
     while (true) {
       await sleep(DELAY)
       const targetId = _.sample(ids)
+
       data[targetId] = updateFakeDataLeafFukushima(data[targetId])
 
       dispatch(receiveSensor({ id: targetId, ...data[targetId] }))
