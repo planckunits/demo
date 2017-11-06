@@ -24,9 +24,10 @@ const GeoLabel = ({ sensor }: { sensor: Sensor }) => (
     </pre>
     <div
       onClick={() => {
-        window.open(
-          `https://www.google.co.jp/maps/@{sensor.gps.lat},{sensor.gps.lng},15z`
-        )
+        const url = `https://www.google.co.jp/maps/@${sensor.gps.lat},${sensor
+          .gps.lng},18z`
+        console.log(url)
+        window.open(url)
       }}
     >
       <FontAwesome name="globe" />

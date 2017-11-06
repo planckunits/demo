@@ -2,7 +2,7 @@
 
 import type { ThunkAction, Sensor } from '../../types'
 import { receiveSensor } from '../SensorContainer/actions'
-import { fakeData, updateFakeData } from '../../utils'
+import { fakeDataLeafFukushima, updateFakeDataLeafFukushima } from '../../utils'
 
 import _ from 'lodash'
 // import * as actions from './actions'
@@ -48,12 +48,12 @@ export function dummyLoop(): ThunkAction {
   return async dispatch => {
     const ids = 'abcdefghijklmnopqrstuvwxyz'.split('').map(x => `Dm_${x}`)
 
-    const data = _.zipObject(ids, _.map(ids, () => fakeData()))
+    const data = _.zipObject(ids, _.map(ids, () => fakeDataLeafFukushima()))
 
     while (true) {
       await sleep(DELAY)
       const targetId = _.sample(ids)
-      data[targetId] = updateFakeData(data[targetId])
+      data[targetId] = updateFakeDataLeafFukushima(data[targetId])
 
       dispatch(receiveSensor({ id: targetId, ...data[targetId] }))
     }
