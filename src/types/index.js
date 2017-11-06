@@ -41,4 +41,5 @@ export type Sensor = {
 
 export type System = {
   tab: 'base' | 'map',
+  intoro: boolean,
 }

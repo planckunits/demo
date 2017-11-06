@@ -14,6 +14,7 @@ const initialSensorState: Sensor = {
   gyro: { x: 0, y: 0, z: 0 },
   interrupt: false,
   hover: false,
+  primary: false,
 }
 
 export default function(

@@ -6,6 +6,7 @@ export type State = System
 
 const initialState: State = {
   tab: 'map',
+  intoro: true,
 }
 
 export default function(
@@ -15,6 +16,8 @@ export default function(
   switch (action.type) {
     case Actions.SWITCH_TAB:
       return { ...state, tab: action.tab }
+    case Actions.START:
+      return { ...state, intoro: false }
     default:
       return state
   }

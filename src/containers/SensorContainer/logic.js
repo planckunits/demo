@@ -2,6 +2,8 @@
 
 import type { ThunkAction, Sensor } from '../../types'
 import { receiveSensor } from '../SensorContainer/actions'
+import { nearOrderSensors } from '../SensorById/selectors'
+import { start } from '../System/actions'
 import { fakeDataLeafFukushima, updateFakeDataLeafFukushima } from '../../utils'
 
 import _ from 'lodash'
@@ -13,6 +15,10 @@ const url =
     ? 'ws://sensor-uniform.cps.im.dendai.ac.jp:1883'
     : 'ws://sensor-uniform.cps.im.dendai.ac.jp:1883'
 // : 'ws://localhost:3001'
+
+const DELAY = 10000 //ms
+
+const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 const faker = fakeDataLeafFukushima()
 
@@ -47,31 +53,50 @@ export function createMqttClient(topic: string): ThunkAction {
         return
       }
       let sensor
+      const interrupt = !getState().System.intoro
       if (id in getState().SensorById) {
-        sensor = { ...getState().SensorById[id], accel, interrupt: true }
+        sensor = { ...getState().SensorById[id], accel, interrupt }
         dispatch(receiveSensor(sensor))
       } else {
         sensor = {
           ...faker.next().value,
           id,
           accel,
-          interrupt: true,
+          interrupt,
           primary: true,
         }
         dispatch(receiveSensor(sensor))
       }
-      dispatch(demoReset(sensor))
+      if (interrupt) {
+        dispatch(wave(sensor))
+        dispatch(demoReset(sensor))
+      }
     })
   }
 }
 
-const DELAY = 10000 //ms
+export function waiting(): ThunkAction {
+  return async dispatch => {
+    await sleep(8000)
+    dispatch(start())
+  }
+}
 
-const sleep = ms => new Promise(r => setTimeout(r, ms))
+export function wave(sensor: Sensor): ThunkAction {
+  return async (dispatch, getState) => {
+    const sensors = nearOrderSensors(getState(), sensor)
+    for (let i = 0; i < sensors.length; i++) {
+      const s = sensors[i]
+      await sleep(600)
+      dispatch(receiveSensor({ ...s, interrupt: true }))
+      dispatch(demoReset(s))
+    }
+  }
+}
 
 export function demoReset(sensor: Sensor): ThunkAction {
   return async dispatch => {
-    await sleep(10 * 1000)
+    await sleep(8 * 1000)
     dispatch(receiveSensor({ ...sensor, interrupt: false }))
   }
 }
