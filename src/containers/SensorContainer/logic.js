@@ -39,8 +39,13 @@ export function createMqttClient(topic: string): ThunkAction {
     client.on('message', (topic, payload) => {
       const topics = topic.split('/')
       const id = topics[1]
-      const pj = JSON.parse(payload.toString())
-      const accel = { x: pj.acc_x, y: pj.acc_y, z: pj.acc_z }
+      let pj, accel
+      try {
+        pj = JSON.parse(payload.toString())
+        accel = { x: pj.acc_x, y: pj.acc_y, z: pj.acc_z }
+      } catch (e) {
+        return
+      }
       let sensor
       if (id in getState().SensorById) {
         sensor = { ...getState().SensorById[id], accel, interrupt: true }
@@ -73,7 +78,7 @@ export function demoReset(sensor: Sensor): ThunkAction {
 
 export function dummyLoop(): ThunkAction {
   return async dispatch => {
-    const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(x => `dum${x}`)
+    const ids = 'ABCDEF'.split('').map(x => `dum${x}`)
 
     const data = _.zipObject(ids, _.map(ids, () => faker.next().value))
     ids.forEach(id => {
