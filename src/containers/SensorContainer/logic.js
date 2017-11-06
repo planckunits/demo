@@ -41,30 +41,44 @@ export function createMqttClient(topic: string): ThunkAction {
       const id = topics[1]
       const pj = JSON.parse(payload.toString())
       const accel = { x: pj.acc_x, y: pj.acc_y, z: pj.acc_z }
+      let sensor
       if (id in getState().SensorById) {
-        dispatch(receiveSensor({ id, accel }))
+        sensor = { ...getState().SensorById[id], accel, interrupt: true }
+        dispatch(receiveSensor(sensor))
       } else {
-        const sensor = {
+        sensor = {
           ...faker.next().value,
           id,
           accel,
+          interrupt: true,
           primary: true,
         }
         dispatch(receiveSensor(sensor))
       }
+      dispatch(demoReset(sensor))
     })
   }
 }
 
-const DELAY = 200 //ms
+const DELAY = 10000 //ms
 
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 
+export function demoReset(sensor: Sensor): ThunkAction {
+  return async dispatch => {
+    await sleep(10 * 1000)
+    dispatch(receiveSensor({ ...sensor, interrupt: false }))
+  }
+}
+
 export function dummyLoop(): ThunkAction {
   return async dispatch => {
-    const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(x => `dumm${x}`)
+    const ids = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(x => `dum${x}`)
 
     const data = _.zipObject(ids, _.map(ids, () => faker.next().value))
+    ids.forEach(id => {
+      dispatch(receiveSensor({ id, ...data[id] }))
+    })
 
     while (true) {
       await sleep(DELAY)
