@@ -103,7 +103,7 @@ export function demoReset(sensor: Sensor): ThunkAction {
 
 export function dummyLoop(): ThunkAction {
   return async dispatch => {
-    const ids = 'ABCDEF'.split('').map(x => `dum${x}`)
+    const ids = 'ABCDEFGHIJKLMN'.split('').map(x => `sensor${x}`)
 
     const data = _.zipObject(ids, _.map(ids, () => faker.next().value))
     ids.forEach(id => {

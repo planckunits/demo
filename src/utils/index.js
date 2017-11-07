@@ -38,14 +38,11 @@ export function* fakeDataLeafFukushima(): Generator<
   void,
   true
 > {
-  const start = 0.0027
-  let di = 0
   while (true) {
-    di++
     yield {
       gps: {
-        lat: 37.3685362 + start + di * (-0.003 / 10),
-        lng: 140.3837 + (Math.random() - 0.5) * 0.0002,
+        lat: 37.3685362 + (Math.random() - 0.5) * 0.003,
+        lng: 140.3837 + (Math.random() - 0.5) * 0.003,
       },
       accel: {
         x: Math.random(),
