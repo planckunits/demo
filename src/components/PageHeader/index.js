@@ -12,12 +12,10 @@ export const Title = styled.h1`
   margin: 0;
 `
 
-const PageHeader = ({ title }: { title: string }) => (
+const PageHeader = (props: { title: string, desc: string }) => (
   <HeaderWrap>
-    <Title>{title}</Title>
-    <p style={{ color: 'white' }}>
-      PlanckUnits x タカヤ株式会社 x 株式会社リプロ RIPRO Corporation Japan
-    </p>
+    <Title>{props.title}</Title>
+    <p style={{ color: 'white' }}>{props.desc}</p>
   </HeaderWrap>
 )
 export default PageHeader
