@@ -82,6 +82,14 @@ export function waiting(): ThunkAction {
   }
 }
 
+export function wave2(): ThunkAction {
+  return async (dispatch, getState) => {
+    const state = getState()
+
+    dispatch(wave(state.SensorById[state.SensorContainer[0]]))
+  }
+}
+
 export function wave(sensor: Sensor): ThunkAction {
   return async (dispatch, getState) => {
     const sensors = nearOrderSensors(getState(), sensor)
